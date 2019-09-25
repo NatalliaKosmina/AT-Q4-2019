@@ -1,6 +1,6 @@
 package RandomNumber;
 
-public class numberRandom {
+public class NumberRandom {
     public static void main(String[] args) {
         try {
             int number = Integer.parseInt(args[0]);

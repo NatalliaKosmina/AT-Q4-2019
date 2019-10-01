@@ -7,7 +7,8 @@
 1. Enter command: 
 ```
 javac CommandLineParams1.java
-``` _for compiling java file_
+``` 
+_for compiling java file_
 2. If compiling java file was successful enter command:
 ``java CommandLineParams1 2 4 6`` _please remember enter three any numbers like input parameters for your program_
 #### task 2

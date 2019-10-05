@@ -2,32 +2,27 @@ public class CompareNumber {
     public static void main(String[] args) {
 
         try {
-            char[] a = args[0].toCharArray();
-            int[] f = new int[args[0].length()];
-            for (int i = 0; i < a.length; i++) {
-                f[i] = Character.getNumericValue(a[i]);
-            }
-            System.out.println(args[0]);
-            int max = f[0];
-            boolean g = true;
-            for (int i = 0; i < f.length - 1; i++) {
+            final char[] anyString = args[0].toCharArray();
+            final int stringLength = args[0].length();
+            boolean isValid = true;
 
-                if (max < f[i + 1]) {
-                    max = f[i + 1];
-                    g = true;
-                } else {
-                    g = false;
+            for (int i = 0; i < stringLength - 1; i++) {
+                if (Integer.parseInt(String.valueOf(anyString[i])) > Integer.parseInt(String.valueOf(anyString[i + 1]))) {
+                    isValid = false;
                     break;
                 }
             }
+            System.out.println(args[0]);
 
-            if (!g) {
-                System.out.println("not");
+            if (!isValid) {
+                System.out.println("This numbers are not consecutive.");
             } else {
-                System.out.println("ok");
+                System.out.println("This numbers are consecutive.");
             }
         } catch (Exception e) {
             System.out.println("Please enter number!");
         }
     }
 }
+
+

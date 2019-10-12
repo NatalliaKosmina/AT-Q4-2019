@@ -1,34 +1,35 @@
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
 import static org.junit.Assert.*;
 
 
 public class CalculatorTest {
+    Calculator calculator = new Calculator();
 
     @Test
-    public void TestCalc() {
-        Calculator calculator = new Calculator();
-        assertNotNull(calculator);
+    public void TestCalcSum() {
+        assertEquals(11, calculator.sum(5, 6), 0);
     }
 
     @Test
-    public void TestNullB() {
-        assertNotNull(double a);
+    public void TestCalcSubtract() {
+        assertEquals(-1, calculator.subtract(8, 9), 0);
     }
 
     @Test
-    public void TestNullB() {
-        assertNotNull();
+    public void TestCalcMultiply() {
+        assertEquals(56, calculator.multiply(7, 8), 0);
     }
 
     @Test
-    public void anyString() {
-        assertTrue(true);
+    public void TestCalcDivide() {
+        assertEquals(2, calculator.divide(16, 8), 0);
     }
-
 
     @Test(expected = ArithmeticException.class)
-    public void divideTestExc(){
-        Calculator calculator = new Calculator();
-        calculator.divide();
+    public void TestCalcDivideByZero() {
+        calculator.divide(5, 0);
     }
 }

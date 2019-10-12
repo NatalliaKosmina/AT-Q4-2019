@@ -11,3 +11,16 @@ javac HtmlTable2.java
 ```
 java HtmlTable2 [path to your file/directory]
 ```
+### Calculator with JUnit
+1. Enter command:
+```
+javac Calculator.java
+```
+2. Compile Tests:
+```
+javac -cp junit-4.12.jar;. CalculatorTest.java
+```
+3. Run your tests:
+```
+java -cp junit-4.12.jar;hamerest-core-1.3.jar;. org.junit.runer.JUnitCore CalculatorTest
+```

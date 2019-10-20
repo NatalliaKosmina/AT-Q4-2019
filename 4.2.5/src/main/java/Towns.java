@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Towns {
+    private static final String END_GAME = "exit";
+    private static final char FIRST_SYMBOL = '0';
+
     public static void main(String[] args) throws IOException {
         System.out.println("Для начала игры введите название любого города. Для завершения введите слово exit.");
 
@@ -14,7 +17,7 @@ public class Towns {
         FileInputStream inputStream = null;
 
         try {
-            inputStream = new FileInputStream("F:\\Java\\AT-Q4-2019\\_425\\src\\main\\resources\\files\\cities2.txt");
+            inputStream = new FileInputStream("425/src/main/resources/files/cities2.txt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -26,7 +29,7 @@ public class Towns {
         }
         bufferedReader.close();
 
-        while (!randomTown.equals("exit")) {
+        while (!randomTown.equals(END_GAME)) {
             System.out.println("Очередь компьютера:");
 
 
@@ -35,7 +38,7 @@ public class Towns {
             for (int i = 0; i < citiesArray.size(); i++) {
 
                 char firstSymbol = compareSymbols(randomTown, citiesArray.get(i));
-                if (firstSymbol != '0') {
+                if (firstSymbol != FIRST_SYMBOL) {
                     cityExist = false;
                     System.out.println(citiesArray.get(i));
                     tempCity = citiesArray.get(i);
@@ -50,10 +53,10 @@ public class Towns {
             }
 
             char tempCompareResult = compareSymbols(tempCity, randomTown);
-            while (tempCompareResult == '0') {
+            while (tempCompareResult == FIRST_SYMBOL) {
                 System.out.println("Вы должны ввести город на букву " + tempCity.charAt(tempCity.length() - 1));
                 randomTown = input.nextLine();
-                if(randomTown.equals("exit")){
+                if (randomTown.equals(END_GAME)) {
                     System.exit(0);
                 }
                 tempCompareResult = compareSymbols(tempCity, randomTown);
@@ -62,11 +65,11 @@ public class Towns {
     }
 
     public static char compareSymbols(String firstWord, String secondWord) {
-        char result = '0';
+        char result = FIRST_SYMBOL;
         char first = Character.toUpperCase(secondWord.charAt(0));
         char second = Character.toUpperCase(firstWord.charAt(firstWord.length() - 1));
 
-        if (second == 'Ь'){
+        if (second == 'Ь') {
             second = Character.toUpperCase(firstWord.charAt(firstWord.length() - 2));
 
         }

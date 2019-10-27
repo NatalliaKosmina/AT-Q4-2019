@@ -1,0 +1,350 @@
+{
+	"info": {
+		"_postman_id": "4fb09013-adf3-4b87-9e26-cb3004ea55e6",
+		"name": "LPT Admin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AuthorixationLPT",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Origin",
+						"value": "https://admin.dev.lpt-network.com"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=UTF-8"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "Referer",
+						"value": "https://admin.dev.lpt-network.com/login"
+					},
+					{
+						"key": "app",
+						"value": "adminPanel"
+					},
+					{
+						"key": "app_version",
+						"value": "1.26.0"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"hadmin\",\"password\":\"qwe\"}"
+				},
+				"url": {
+					"raw": "https://auth{{dev}}/v3/authenticate",
+					"protocol": "https",
+					"host": [
+						"auth{{dev}}"
+					],
+					"path": [
+						"v3",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9a620191-47d6-43b5-ba7d-c0bcbe8cce30",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"pm.test(\"response should be okay to process\", function () {",
+							"      pm.response.to.not.be.error;",
+							"      pm.response.to.have.jsonBody(Object);",
+							"      pm.response.to.not.have.jsonBody('error');",
+							"  });",
+							"  ",
+							"pm.test(\"Orders lis is equel 20\", function () {",
+							"    pm.expect(jsonData.orders.length).to.eql(jsonData.per_page);",
+							"});",
+							"",
+							"pm.test(\"Page is 1\", function () {",
+							"    pm.expect(jsonData.page).to.eql(1);",
+							"});",
+							"",
+							"pm.test(\"ID, application, client id are present\", function () {",
+							"    pm.expect(jsonData.orders[0]._id).to.be.a(\"string\");",
+							"    pm.expect(jsonData.orders[0].application).to.be.a(\"string\");",
+							"    pm.expect(jsonData.orders[0].client._id).to.be.a(\"string\");",
+							"});",
+							"",
+							"pm.test(\"Active, visible are boolean\", function () {",
+							"    pm.expect(jsonData.orders[0].client.active).to.be.a(\"boolean\");",
+							"    pm.expect(jsonData.orders[0].client.visible).to.be.a(\"boolean\");",
+							"});",
+							"",
+							"pm.test(\"Expects every order type to be 'invoice'\", function() {",
+							"    jsonData.orders.forEach(function(order) {",
+							"        pm.expect(order).to.have.property(\"type\", \"invoice\");",
+							"    });",
+							"});",
+							"",
+							"pm.test(\"Expects every order has a client\", function() {",
+							"    jsonData.orders.forEach(function(order) {",
+							"        pm.expect(order).to.have.property(\"client\");",
+							"    });",
+							"});",
+							"",
+							"pm.test(\"Expects every order has a client\", function() {",
+							"    jsonData.orders.forEach(function(order) {",
+							"        pm.expect(order.client).to.exist;",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qwe",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "hadmin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://order{{dev}}/v1/orders?populate[]=seller&populate[]=store&populate[]=client&populate[]=laboratory&populate[]=statuses.status&populate[]=matchedLenses.product&populate[]=choosenLenses.product&populate[]=products.product&populate[]=comments&populate[]=prescription&type=invoice&paid=true&sort=created_at:-1&page=1&limit=20",
+					"protocol": "https",
+					"host": [
+						"order{{dev}}"
+					],
+					"path": [
+						"v1",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "populate[]",
+							"value": "seller"
+						},
+						{
+							"key": "populate[]",
+							"value": "store"
+						},
+						{
+							"key": "populate[]",
+							"value": "client"
+						},
+						{
+							"key": "populate[]",
+							"value": "laboratory"
+						},
+						{
+							"key": "populate[]",
+							"value": "statuses.status"
+						},
+						{
+							"key": "populate[]",
+							"value": "matchedLenses.product"
+						},
+						{
+							"key": "populate[]",
+							"value": "choosenLenses.product"
+						},
+						{
+							"key": "populate[]",
+							"value": "products.product"
+						},
+						{
+							"key": "populate[]",
+							"value": "comments"
+						},
+						{
+							"key": "populate[]",
+							"value": "prescription"
+						},
+						{
+							"key": "type",
+							"value": "invoice"
+						},
+						{
+							"key": "paid",
+							"value": "true"
+						},
+						{
+							"key": "sort",
+							"value": "created_at:-1"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order details page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "428a6dd0-7059-4643-a61f-4b351aab7c59",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test(\"Order id\", function () {",
+							"    pm.expect(jsonData._id).to.eql(\"5daec11a521cb451f1cfcd26\");",
+							"});",
+							"",
+							"pm.test(\"Order have property role\", function () {",
+							"    pm.expect(jsonData.seller).to.have.property(\"role\");",
+							"});",
+							"",
+							"pm.test(\"Expect orders type is 'invoice'\", function() {",
+							"    pm.expect(jsonData).to.have.property(\"type\", \"invoice\");",
+							"});",
+							"",
+							"pm.test(\"Expect orders type is 'invoice'\", function() {",
+							"    ",
+							"    pm.expect(jsonData.prescription).to.have.property(\"deleted\", false);",
+							"});",
+							"",
+							"pm.test(\"isManual, isUpgrated  are boolean\", function () {",
+							"    ",
+							"    pm.expect(jsonData.isManual).to.be.a(\"boolean\");",
+							"    pm.expect(jsonData.isUpgrated).to.be.a(\"boolean\");",
+							"});",
+							"",
+							"pm.test(\"Patient has property prescription\", function () {",
+							"    pm.expect(jsonData.patient.prescriptions).to.exist;",
+							"});",
+							"",
+							"pm.test(\"Prescription is not null\", function () {",
+							"    pm.expect(jsonData.patient.prescriptions).to.not.eql(null);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://order.dev.lpt-network.com/v1/order/2747659?populate[]=laboratory&populate[]=prescription",
+					"protocol": "https",
+					"host": [
+						"order",
+						"dev",
+						"lpt-network",
+						"com"
+					],
+					"path": [
+						"v1",
+						"order",
+						"2747659"
+					],
+					"query": [
+						{
+							"key": "populate[]",
+							"value": "laboratory"
+						},
+						{
+							"key": "populate[]",
+							"value": "prescription"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "qwe",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "hadmin",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "92f6d059-017d-43e5-991c-bad86afd4b10",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "d7ca42f1-5400-48db-a9ec-206a9f90d2eb",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

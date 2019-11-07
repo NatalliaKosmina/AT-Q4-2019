@@ -1,0 +1,4 @@
+D =  -8.0
+The roots of the equation do not exist
+D =  -71.0
+The roots of the equation do not exist

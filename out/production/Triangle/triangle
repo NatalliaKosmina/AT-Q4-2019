@@ -1,0 +1,8 @@
+#!/bin/bash
+javac Triangle.java
+while read LINE
+do
+       	for number in "$LINE"
+	do java Triangle "$number" >> results.txt
+	done
+done < /home/nata/folder_date-time_041119_200053/initValuesTriangle.txt

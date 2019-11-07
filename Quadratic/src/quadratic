@@ -1,0 +1,7 @@
+#!/bin/bash
+test -e ./results.txt && rm -f ./results.txt
+javac Quadratic.java
+while read LINE
+do java Quadratic $LINE >> results.txt
+done < /home/nata/folder_date-time_041119_200053/initValuesQuadratic.txt
+rm -f ./*.class

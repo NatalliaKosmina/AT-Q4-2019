@@ -4,6 +4,6 @@ test -e ./results.txt && rm -f ./results.txt
 javac CircleArea.java
 while read LINE
 do java CircleArea "$LINE" >> results.txt 
-done < /home/nata/folder_date-time_041119_200053/initiValues.txt
+done < ./initValuesCircle.txt
 rm -f ./*.class
 

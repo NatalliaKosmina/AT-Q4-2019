@@ -3,5 +3,5 @@ test -e ./results.txt && rm -f ./results.txt
 javac Triangle.java
 while read LINE
 do java Triangle $LINE >> results.txt
-done < /home/nata/folder_date-time_041119_200053/initValuesTriangle.txt
+done < ./initValuesTriangle.txt
 rm -f ./*.class

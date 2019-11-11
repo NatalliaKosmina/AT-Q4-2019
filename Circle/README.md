@@ -25,31 +25,10 @@ Before starting I created some files with *.class extension (touch filenmae.clas
 ```while read LINE; do touch "$LINE"; done < folders.txt```
 12. Square Circle:
  - create bash script using
-```cat > circle```
+```cat > first```
 - permissons. you should be in the folder with run file:
-```chmod +x ./circle```
+```chmod +x ./file```
 - write there your script.
 - run your script:
-```./first```
-NB!Script should be in the src folder with java file.
-13. Triangle:
- - create bash script using the same steps like for point 12(create + permission) with name 'triangle'
-- run your script:
-```./triangle```
-NB!Script should be in the src folder with java file.
-14. Quadratic:
-- Go to the folder with Quadratic/src
-- run script "quadratic"
-```./quadratic```
-15. Square Circle:
-- Go to the folder with PageNumber/src
-- run script "pageNumber"
-```./pageNumber```
-16. NumberRandom:
-- Go to the folder with NumberRandom/src
-- run script "number"
-```./number```
-17. Unit test
-- Go to the folder Towns1/src
-- run script "towns"
-```./towns```
+```./script```
+NB!Script should be in the folder where java file is.

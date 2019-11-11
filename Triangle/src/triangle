@@ -1,0 +1,7 @@
+#!/bin/bash
+test -e ./results.txt && rm -f ./results.txt
+javac Triangle.java
+while read LINE
+do java Triangle $LINE >> results.txt
+done < ./initValuesTriangle.txt
+rm -f ./*.class

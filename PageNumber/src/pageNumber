@@ -1,0 +1,8 @@
+#!/bin/bash
+#Our comment is here
+test -e ./results.txt && rm -f ./results.txt
+javac PageNumber.java
+while read LINE
+do java PageNumber "$LINE" >> results.txt
+done < ./initValuesPages.txt
+rm -f ./*.class

@@ -1,0 +1,9 @@
+#!/bin/bash
+#Our comment is here
+test -e ./results.txt && rm -f ./results.txt
+javac CircleArea.java
+while read LINE
+do java CircleArea "$LINE" >> results.txt 
+done < ./initValuesCircle.txt
+rm -f ./*.class
+

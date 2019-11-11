@@ -1,0 +1,9 @@
+#!/bin/bash
+#Our comment is here
+test -e ./results.txt && rm -f ./results.txt
+javac PageNumber.java
+while read LINE
+do java PageNumber "$LINE" >> results.txt
+done < /home/nata/folder_date-time_041119_200053/initValuesPages.txt
+rm -f ./*.class
+

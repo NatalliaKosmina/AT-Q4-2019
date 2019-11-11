@@ -1,0 +1,7 @@
+#!/bin/bash
+test -e ./results.txt && rm -f ./results.txt
+javac Quadratic.java
+while read LINE
+do java Quadratic $LINE >> results.txt
+done < ./initValuesQuadratic.txt
+rm -f ./*.class

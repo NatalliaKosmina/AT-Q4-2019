@@ -1,0 +1,8 @@
+#!/bin/bash
+#Our comment is here
+test -e ./results.txt && rm -f ./results.txt
+javac NumberRandom.java
+while read LINE
+do java NumberRandom "$LINE" >> results.txt
+done < /home/nata/folder_date-time_041119_200053/initValuesRandom.txt
+rm -f ./*.class
